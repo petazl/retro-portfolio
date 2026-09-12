@@ -9,6 +9,7 @@ type WindowState = {
   x: number;
   y: number;
   zIndex: number;
+  minimized: boolean;
 };
 
 type DragState = {
@@ -69,6 +70,7 @@ const y = window.innerHeight / 2 - windowHeight / 2 + offset;
         x,
         y,
         zIndex: highestZ + 1,
+        minimized: false,
       },
     ];
   });
@@ -79,6 +81,35 @@ const y = window.innerHeight / 2 - windowHeight / 2 + offset;
     setOpenWindows((current) =>
       current.filter((window) => window.id !== id),
     );
+  };
+  
+  const minimizeWindow = (id: WindowType) => {
+    setOpenWindows((current) =>
+      current.map((window) =>
+        window.id === id
+          ? { ...window, minimized: true }
+          : window,
+      ),
+    );
+  };
+
+  const restoreWindow = (id: WindowType) => {
+    setOpenWindows((current) => {
+      const highestZ = Math.max(
+        ...current.map((window) => window.zIndex),
+        0,
+      );
+
+      return current.map((window) =>
+        window.id === id
+          ? {
+              ...window,
+              minimized: false,
+              zIndex: highestZ + 1,
+            }
+          : window,
+      );
+    });
   };
 
   // Bring a window to the front
@@ -168,7 +199,9 @@ const y = window.innerHeight / 2 - windowHeight / 2 + offset;
       </div>
 
       {/* Open windows */}
-      {openWindows.map((windowState) => (
+      {openWindows
+        .filter((windowState) => !windowState.minimized)
+        .map((windowState) => (
         <div
           key={windowState.id}
           className={`retro-window ${
@@ -204,7 +237,7 @@ const y = window.innerHeight / 2 - windowHeight / 2 + offset;
             >
               ×
             </button>
-          </div>
+          </div> \\\\\IM HERE NEED TO FINISHHHH
 
           {windowState.type === "about" && (
             <div className="window-content">
