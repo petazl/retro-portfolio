@@ -1,32 +1,99 @@
 /* Pixelify Sans */
 @import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap");
 
-/* Desktop/game layer */
+/* =========================================================
+   Global fonts
+   ========================================================= */
+
 .desktop {
   font-family: "Pixelify Sans", sans-serif;
 }
 
-/* Actual application windows */
 .retro-window {
   font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
 }
 
+/* =========================================================
+   Global Windows 95/98-style scrollbars
+   ========================================================= */
+
+* {
+  scrollbar-color: #c0c0c0 #c0c0c0;
+  scrollbar-width: auto;
+}
+
+*::-webkit-scrollbar {
+  width: 18px;
+  height: 18px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #c0c0c0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: white;
+  border-bottom-color: white;
+}
+
+*::-webkit-scrollbar-button {
+  display: block;
+
+  width: 18px;
+  height: 18px;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+}
+
+*::-webkit-scrollbar-button:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: white;
+  border-bottom-color: white;
+}
+
+/* =========================================================
+   Desktop / game layer
+   ========================================================= */
+
 .desktop {
   width: 100%;
   height: 100vh;
+
   position: relative;
   overflow: hidden;
 
   background:
-    radial-gradient(circle at 50% 40%, #159090 0%, #087878 45%, #006666 100%);
+    radial-gradient(
+      circle at 50% 40%,
+      #159090 0%,
+      #087878 45%,
+      #006666 100%
+    );
 
   font-family: "Pixelify Sans", sans-serif;
   color: #000;
 }
 
-/* -------------------- */
-/* Desktop icons        */
-/* -------------------- */
+/* =========================================================
+   Desktop icons
+   ========================================================= */
 
 .desktop-icon {
   width: 100px;
@@ -35,6 +102,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   gap: 5px;
 
   border: none;
@@ -44,6 +112,7 @@
   color: white;
 
   cursor: pointer;
+
   font-family: inherit;
 
   transition: background 120ms ease;
@@ -51,8 +120,10 @@
 
 .desktop-icon:hover {
   background: transparent;
+
   outline: 4px solid rgba(0, 0, 0, 0.18);
   outline-offset: -10px;
+
   border-radius: 4px;
 }
 
@@ -63,20 +134,22 @@
 
 .desktop-icon-label {
   font-family: "Pixelify Sans", sans-serif;
+
   font-size: 14px;
+
   text-shadow:
     1px 1px 0 #000,
     -1px 0 0 #000;
 }
 
-/* -------------------- */
-/* Windows              */
-/* -------------------- */
+/* =========================================================
+   Windows
+   ========================================================= */
 
 .retro-window {
   position: absolute;
 
-  width: 520px;
+  width: 620px;
   max-width: calc(100vw - 40px);
 
   background: #c0c0c0;
@@ -89,9 +162,9 @@
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
 }
 
-/* -------------------- */
-/* Window controls      */
-/* -------------------- */
+/* =========================================================
+   Window controls
+   ========================================================= */
 
 .window-controls {
   display: flex;
@@ -127,12 +200,13 @@
   border-bottom-color: white;
 }
 
-/* -------------------- */
-/* Window title bar     */
-/* -------------------- */
+/* =========================================================
+   Window title bar
+   ========================================================= */
 
 .window-titlebar {
   height: 30px;
+
   padding: 0 4px 0 7px;
 
   display: flex;
@@ -182,9 +256,9 @@
   border-bottom-color: white;
 }
 
-/* -------------------- */
-/* Window content       */
-/* -------------------- */
+/* =========================================================
+   Window content
+   ========================================================= */
 
 .window-content {
   padding: 24px;
@@ -193,6 +267,7 @@
 .window-content h1 {
   margin-top: 0;
   margin-bottom: 4px;
+
   font-size: 28px;
 }
 
@@ -213,13 +288,95 @@
   margin: 18px 0;
 }
 
-/* -------------------- */
-/* Social               */
-/* -------------------- */
+/* =========================================================
+   About window content
+   ========================================================= */
+
+.about-window-content {
+  height: 480px;
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  padding: 24px;
+}
+
+.about-role {
+  margin-top: 0;
+  margin-bottom: 4px;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.about-section {
+  margin-bottom: 28px;
+}
+
+.about-section h2 {
+  margin: 0 0 10px 0;
+
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.about-entry {
+  margin-bottom: 18px;
+}
+
+.about-entry h3 {
+  margin: 0 0 4px 0;
+
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.about-entry p {
+  margin-top: 5px;
+
+  line-height: 1.5;
+}
+
+.about-meta {
+  margin: 0;
+
+  font-style: italic;
+
+  color: #404040;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+.about-tags span {
+  padding: 4px 7px;
+
+  background: #d4d0c8;
+
+  border: 1px solid #808080;
+
+  font-size: 12px;
+}
+
+.about-footer {
+  text-align: center;
+
+  font-style: italic;
+}
+
+/* =========================================================
+   Social
+   ========================================================= */
 
 .social-links {
   display: flex;
   gap: 10px;
+
   flex-wrap: wrap;
 }
 
@@ -234,6 +391,7 @@
   border-bottom: 3px solid #404040;
 
   font-weight: bold;
+
   cursor: pointer;
 }
 
@@ -244,9 +402,9 @@
   border-bottom-color: white;
 }
 
-/* -------------------- */
-/* Taskbar              */
-/* -------------------- */
+/* =========================================================
+   Taskbar
+   ========================================================= */
 
 .taskbar {
   position: absolute;
@@ -259,6 +417,7 @@
 
   display: flex;
   align-items: center;
+
   gap: 5px;
 
   padding: 3px;
@@ -276,13 +435,14 @@
   align-items: center;
 
   box-sizing: border-box;
-  padding: 0 10px;
 
+  padding: 0 10px;
   margin: 0;
 
   background: #c0c0c0;
 
   border: none;
+
   border-top: 3px solid white;
   border-left: 3px solid white;
   border-right: 3px solid #404040;
@@ -291,10 +451,12 @@
   color: #000;
 
   font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+
   font-size: 13px;
   font-weight: bold;
 
   cursor: pointer;
+
   appearance: none;
 }
 
@@ -321,9 +483,11 @@
 
   display: flex;
   align-items: center;
+
   gap: 4px;
 
   box-sizing: border-box;
+
   padding: 0 10px;
 
   background: #c0c0c0;
@@ -349,6 +513,7 @@
 
 .taskbar-clock {
   margin-left: auto;
+
   padding: 0 12px;
 
   border-top: 3px solid #808080;
@@ -357,5 +522,6 @@
   border-bottom: 3px solid white;
 
   font-size: 13px;
+
   font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
 }

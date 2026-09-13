@@ -58,7 +58,7 @@ function App() {
         );
       }
 
-      const windowWidth = 520;
+      const windowWidth = 620;
       const windowHeight = 300;
 
       const offset = current.length * 32;
@@ -275,38 +275,192 @@ function App() {
               </div>
             </div>
 
-            {windowState.type === "about" && (
-              <div className="window-content">
-                <h1>PETAZL</h1>
+            {/* About Me */}
 
-                <p className="subtitle">
-                  Electrical & Electronic Engineering
+            {windowState.type === "about" && (
+              <div className="about-window-content">
+                <h1>Richmond</h1>
+
+                <p className="about-role">
+                  Electrical & Electronic Engineering Student
+                </p>
+
+                <p>
+                  University of Warwick
                 </p>
 
                 <hr />
 
-                <h2>About Me</h2>
+                <section className="about-section">
+                  <h2>Profile</h2>
 
-                <p>
-                  Hey! I'm PETAZL, an Electrical & Electronic
-                  Engineering student at the University of
-                  Warwick.
-                </p>
+                  <p>
+                    I'm an Electrical & Electronic Engineering
+                    student at the University of Warwick with a
+                    strong interest in computer architecture,
+                    embedded systems and digital hardware.
+                  </p>
 
-                <p>
-                  I'm interested in computer architecture,
-                  embedded systems, electronics, hardware
-                  design and building weird things with
-                  computers.
+                  <p>
+                    I enjoy working on projects that sit between
+                    hardware and software, particularly where I
+                    can design, build and test systems from the
+                    ground up.
+                  </p>
+
+                  <p>
+                    Outside of university, I'm involved in
+                    engineering teams, technical societies and
+                    personal projects that let me explore
+                    hardware beyond the curriculum.
+                  </p>
+                </section>
+
+                <section className="about-section">
+                  <h2>Education</h2>
+
+                  <div className="about-entry">
+                    <h3>University of Warwick</h3>
+
+                    <p className="about-meta">
+                      MEng Electrical & Electronic Engineering
+                    </p>
+
+                    <p>
+                      Currently studying Electrical & Electronic
+                      Engineering, with coursework spanning
+                      semiconductor devices, signal processing,
+                      systems and software engineering, and
+                      electrical & electronic design.
+                    </p>
+                  </div>
+                </section>
+
+                <section className="about-section">
+                  <h2>Projects</h2>
+
+                  <div className="about-entry">
+                    <h3>Tetra32</h3>
+
+                    <p>
+                      A long-term personal computer architecture
+                      project centred around a custom 32-bit
+                      instruction set architecture. The project
+                      explores CPU design, programming languages,
+                      RTL, verification, FPGA implementation and
+                      eventually ASIC design.
+                    </p>
+                  </div>
+
+                  <div className="about-entry">
+                    <h3>Warwick Moto</h3>
+
+                    <p>
+                      Control Systems and Modelling Lead Engineer
+                      working on an electric race motorcycle. My
+                      work covers inverter and VCU systems, motor
+                      testing, dyno analysis, modelling, data
+                      acquisition and vehicle electronics.
+                    </p>
+                  </div>
+
+                  <div className="about-entry">
+                    <h3>Redactify</h3>
+
+                    <p>
+                      A Python-based document and image redaction
+                      application combining a graphical interface
+                      with AI-assisted functionality.
+                    </p>
+                  </div>
+                </section>
+
+                <section className="about-section">
+                  <h2>Academic Interests</h2>
+
+                  <div className="about-tags">
+                    <span>Computer Architecture</span>
+                    <span>ASIC Design</span>
+                    <span>Embedded Systems</span>
+                    <span>FPGA</span>
+                    <span>SoC Design</span>
+                    <span>VLSI</span>
+                    <span>RTL & Verification</span>
+                    <span>Silicon Photonics</span>
+                    <span>Digital Systems</span>
+                    <span>Power Electronics</span>
+                  </div>
+                </section>
+
+                <section className="about-section">
+                  <h2>Teams & Activities</h2>
+
+                  <div className="about-entry">
+                    <h3>Warwick Moto</h3>
+
+                    <p>
+                      Control Systems and Modelling Lead Engineer.
+                    </p>
+                  </div>
+
+                  <div className="about-entry">
+                    <h3>
+                      University of Warwick Electronics Society
+                    </h3>
+
+                    <p>
+                      Founder / organiser, working to build a
+                      community around electronics, embedded
+                      systems and practical engineering projects.
+                    </p>
+                  </div>
+                </section>
+
+                <section className="about-section">
+                  <h2>Hobbies & Interests</h2>
+
+                  <p>
+                    Outside engineering, I enjoy motorcycles,
+                    fitness, volleyball, arcade and rhythm games,
+                    and exploring computer hardware and
+                    technology.
+                  </p>
+
+                  <p>
+                    I also enjoy building small projects simply
+                    because they're interesting — particularly
+                    things involving electronics, programming or
+                    unusual hardware.
+                  </p>
+                </section>
+
+                <section className="about-section">
+                  <h2>Currently Learning</h2>
+
+                  <p>
+                    C++, computer architecture, RTL design,
+                    SystemVerilog, FPGA development and
+                    hardware/software co-design.
+                  </p>
+                </section>
+
+                <hr />
+
+                <p className="about-footer">
+                  Thanks for stopping by.
                 </p>
               </div>
             )}
+
+            {/* Social */}
 
             {windowState.type === "social" && (
               <div className="window-content">
                 <h1>Social</h1>
 
-                <p>Find me around the internet.</p>
+                <p>
+                  Find me around the internet.
+                </p>
 
                 <hr />
 
