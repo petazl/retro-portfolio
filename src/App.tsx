@@ -34,55 +34,67 @@ function App() {
     return () => clearInterval(timer);
   }, []);
 
-  // Open a window, or bring it to the front if it's already open
+  // Open a window, or bring it to the front if already open
   const openWindow = (type: WindowType) => {
-  setOpenWindows((current) => {
-    const highestZ = Math.max(
-      ...current.map((window) => window.zIndex),
-      0,
-    );
-
-    const existingWindow = current.find(
-      (window) => window.id === type,
-    );
-
-    if (existingWindow) {
-      return current.map((window) =>
-        window.id === type
-          ? { ...window, zIndex: highestZ + 1 }
-          : window,
+    setOpenWindows((current) => {
+      const highestZ = Math.max(
+        ...current.map((window) => window.zIndex),
+        0,
       );
-    }
 
-const windowWidth = 520;
-const windowHeight = 300;
+      const existingWindow = current.find(
+        (window) => window.id === type,
+      );
 
-const offset = current.length * 32;
+      if (existingWindow) {
+        return current.map((window) =>
+          window.id === type
+            ? {
+                ...window,
+                minimized: false,
+                zIndex: highestZ + 1,
+              }
+            : window,
+        );
+      }
 
-const x = window.innerWidth / 2 - windowWidth / 2 + offset;
-const y = window.innerHeight / 2 - windowHeight / 2 + offset;
+      const windowWidth = 520;
+      const windowHeight = 300;
 
-    return [
-      ...current,
-      {
-        id: type,
-        type,
-        x,
-        y,
-        zIndex: highestZ + 1,
-        minimized: false,
-      },
-    ];
-  });
-};
+      const offset = current.length * 32;
 
-  // Close one window
+      const x =
+        window.innerWidth / 2 -
+        windowWidth / 2 +
+        offset;
+
+      const y =
+        window.innerHeight / 2 -
+        windowHeight / 2 +
+        offset;
+
+      return [
+        ...current,
+        {
+          id: type,
+          type,
+          x,
+          y,
+          zIndex: highestZ + 1,
+          minimized: false,
+        },
+      ];
+    });
+  };
+
+  // Close a window
   const closeWindow = (id: WindowType) => {
     setOpenWindows((current) =>
       current.filter((window) => window.id !== id),
     );
   };
-  
+
+  // Minimize a window
   const minimizeWindow = (id: WindowType) => {
     setOpenWindows((current) =>
       current.map((window) =>
@@ -93,6 +105,7 @@ const y = window.innerHeight / 2 - windowHeight / 2 + offset;
     );
   };
 
+  // Restore a minimized window
   const restoreWindow = (id: WindowType) => {
     setOpenWindows((current) => {
       const highestZ = Math.max(
@@ -122,7 +135,10 @@ const y = window.innerHeight / 2 - windowHeight / 2 + offset;
 
       return current.map((window) =>
         window.id === id
-          ? { ...window, zIndex: highestZ + 1 }
+          ? {
+              ...window,
+              zIndex: highestZ + 1,
+            }
           : window,
       );
     });
@@ -180,13 +196,16 @@ const y = window.innerHeight / 2 - windowHeight / 2 + offset;
   return (
     <main className="desktop">
       {/* Desktop icons */}
+
       <div className="desktop-icons">
         <button
           className="desktop-icon"
           onClick={() => openWindow("about")}
         >
           <span className="desktop-icon-image">👤</span>
-          <span className="desktop-icon-label">About Me</span>
+          <span className="desktop-icon-label">
+            About Me
+          </span>
         </button>
 
         <button
@@ -194,100 +213,143 @@ const y = window.innerHeight / 2 - windowHeight / 2 + offset;
           onClick={() => openWindow("social")}
         >
           <span className="desktop-icon-image">🌐</span>
-          <span className="desktop-icon-label">Social</span>
+          <span className="desktop-icon-label">
+            Social
+          </span>
         </button>
       </div>
 
       {/* Open windows */}
+
       {openWindows
         .filter((windowState) => !windowState.minimized)
         .map((windowState) => (
-        <div
-          key={windowState.id}
-          className={`retro-window ${
-            windowState.type === "social"
-              ? "social-window"
-              : ""
-          }`}
-          style={{
-            left: windowState.x,
-            top: windowState.y,
-            zIndex: windowState.zIndex,
-          }}
-          onMouseDown={() => bringToFront(windowState.id)}
-        >
           <div
-            className="window-titlebar"
-            onMouseDown={(event) =>
-              startDragging(event, windowState)
+            key={windowState.id}
+            className="retro-window"
+            style={{
+              left: windowState.x,
+              top: windowState.y,
+              zIndex: windowState.zIndex,
+            }}
+            onMouseDown={() =>
+              bringToFront(windowState.id)
             }
           >
-            <span>
+            <div
+              className="window-titlebar"
+              onMouseDown={(event) =>
+                startDragging(event, windowState)
+              }
+            >
+              <span>
+                {windowState.type === "about"
+                  ? "👤 About Me"
+                  : "🌐 Social"}
+              </span>
+
+              <div className="window-controls">
+                <button
+                  className="window-minimize"
+                  onMouseDown={(event) =>
+                    event.stopPropagation()
+                  }
+                  onClick={() =>
+                    minimizeWindow(windowState.id)
+                  }
+                >
+                  _
+                </button>
+
+                <button
+                  className="window-close"
+                  onMouseDown={(event) =>
+                    event.stopPropagation()
+                  }
+                  onClick={() =>
+                    closeWindow(windowState.id)
+                  }
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+
+            {windowState.type === "about" && (
+              <div className="window-content">
+                <h1>PETAZL</h1>
+
+                <p className="subtitle">
+                  Electrical & Electronic Engineering
+                </p>
+
+                <hr />
+
+                <h2>About Me</h2>
+
+                <p>
+                  Hey! I'm PETAZL, an Electrical & Electronic
+                  Engineering student at the University of
+                  Warwick.
+                </p>
+
+                <p>
+                  I'm interested in computer architecture,
+                  embedded systems, electronics, hardware
+                  design and building weird things with
+                  computers.
+                </p>
+              </div>
+            )}
+
+            {windowState.type === "social" && (
+              <div className="window-content">
+                <h1>Social</h1>
+
+                <p>Find me around the internet.</p>
+
+                <hr />
+
+                <div className="social-links">
+                  <button>GitHub</button>
+                  <button>LinkedIn</button>
+                  <button>Instagram</button>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+
+      {/* Taskbar */}
+
+      <div className="taskbar">
+        <button className="start-button">
+          🪟 <strong>Start</strong>
+        </button>
+
+        <div className="taskbar-windows">
+          {openWindows.map((windowState) => (
+            <button
+              key={windowState.id}
+              className={`taskbar-app ${
+                windowState.minimized
+                  ? ""
+                  : "taskbar-window-active"
+              }`}
+              onClick={() => {
+                if (windowState.minimized) {
+                  restoreWindow(windowState.id);
+                } else {
+                  bringToFront(windowState.id);
+                }
+              }}
+            >
               {windowState.type === "about"
                 ? "👤 About Me"
                 : "🌐 Social"}
-            </span>
-
-            <button
-              className="window-close"
-              onMouseDown={(event) =>
-                event.stopPropagation()
-              }
-              onClick={() => closeWindow(windowState.id)}
-            >
-              ×
             </button>
-          </div> \\\\\IM HERE NEED TO FINISHHHH
-
-          {windowState.type === "about" && (
-            <div className="window-content">
-              <h1>PETAZL</h1>
-
-              <p className="subtitle">
-                Electrical & Electronic Engineering
-              </p>
-
-              <hr />
-
-              <h2>About Me</h2>
-
-              <p>
-                Hey! I'm PETAZL, an Electrical & Electronic
-                Engineering student at the University of
-                Warwick.
-              </p>
-
-              <p>
-                I'm interested in computer architecture,
-                embedded systems, electronics, hardware design
-                and building weird things with computers.
-              </p>
-            </div>
-          )}
-
-          {windowState.type === "social" && (
-            <div className="window-content">
-              <h1>Social</h1>
-
-              <p>Find me around the internet.</p>
-
-              <hr />
-
-              <div className="social-links">
-                <button>GitHub</button>
-                <button>LinkedIn</button>
-                <button>Instagram</button>
-              </div>
-            </div>
-          )}
+          ))}
         </div>
-      ))}
-
-      {/* Taskbar */}
-      <div className="taskbar">
-        <button className="start-button">
-           <strong>Start</strong>
-        </button>
 
         <div className="taskbar-clock">
           {currentTime.toLocaleTimeString([], {
