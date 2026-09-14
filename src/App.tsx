@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./App.css";
 
 type WindowType = "about" | "social";
@@ -18,12 +18,54 @@ type DragState = {
   offsetY: number;
 };
 
+type ScrollbarState = {
+  clientHeight: number;
+  scrollHeight: number;
+  scrollTop: number;
+  trackHeight: number;
+};
+
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const [openWindows, setOpenWindows] = useState<WindowState[]>([]);
 
   const [dragging, setDragging] = useState<DragState | null>(null);
+
+  const aboutContentRef = useRef<HTMLDivElement>(null);
+  const aboutScrollbarTrackRef = useRef<HTMLDivElement>(null);
+  const [aboutScrollbar, setAboutScrollbar] =
+    useState<ScrollbarState>({
+      clientHeight: 0,
+      scrollHeight: 0,
+      scrollTop: 0,
+      trackHeight: 0,
+    });
+  const [aboutThumbDrag, setAboutThumbDrag] = useState<{
+    pointerId: number;
+    scrollTop: number;
+    startY: number;
+  } | null>(null);
+
+  const updateAboutScrollbar = useCallback(() => {
+    const content = aboutContentRef.current;
+    const track = aboutScrollbarTrackRef.current;
+
+    if (!content || !track) {
+      return;
+    }
+
+    setAboutScrollbar({
+      clientHeight: content.clientHeight,
+      scrollHeight: content.scrollHeight,
+      scrollTop: content.scrollTop,
+      trackHeight: track.clientHeight,
+    });
+  }, []);
+
+  const scrollAboutBy = (amount: number) => {
+    aboutContentRef.current?.scrollBy({ top: amount });
+  };
 
   // Live clock
   useEffect(() => {
@@ -193,6 +235,91 @@ function App() {
     };
   }, [dragging]);
 
+  useEffect(() => {
+    const content = aboutContentRef.current;
+    const track = aboutScrollbarTrackRef.current;
+
+    if (!content || !track) {
+      return;
+    }
+
+    updateAboutScrollbar();
+
+    const observer = new ResizeObserver(updateAboutScrollbar);
+    observer.observe(content);
+    observer.observe(track);
+    window.addEventListener("resize", updateAboutScrollbar);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateAboutScrollbar);
+    };
+  }, [openWindows, updateAboutScrollbar]);
+
+  const aboutMaxScroll = Math.max(
+    aboutScrollbar.scrollHeight - aboutScrollbar.clientHeight,
+    0,
+  );
+  const aboutThumbHeight = Math.min(
+    aboutScrollbar.trackHeight,
+    Math.max(
+      28,
+      aboutScrollbar.trackHeight *
+        (aboutScrollbar.clientHeight / aboutScrollbar.scrollHeight || 1),
+    ),
+  );
+  const aboutMaxThumbOffset = Math.max(
+    aboutScrollbar.trackHeight - aboutThumbHeight,
+    0,
+  );
+  const aboutThumbOffset =
+    aboutMaxScroll > 0
+      ? (aboutScrollbar.scrollTop / aboutMaxScroll) *
+        aboutMaxThumbOffset
+      : 0;
+
+  const startAboutThumbDrag = (
+    event: React.PointerEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.currentTarget.setPointerCapture(event.pointerId);
+
+    setAboutThumbDrag({
+      pointerId: event.pointerId,
+      scrollTop: aboutScrollbar.scrollTop,
+      startY: event.clientY,
+    });
+  };
+
+  const dragAboutThumb = (
+    event: React.PointerEvent<HTMLButtonElement>,
+  ) => {
+    if (!aboutThumbDrag || event.pointerId !== aboutThumbDrag.pointerId) {
+      return;
+    }
+
+    const content = aboutContentRef.current;
+
+    if (!content || aboutMaxThumbOffset === 0) {
+      return;
+    }
+
+    const scrollAmount =
+      ((event.clientY - aboutThumbDrag.startY) / aboutMaxThumbOffset) *
+      aboutMaxScroll;
+
+    content.scrollTop = aboutThumbDrag.scrollTop + scrollAmount;
+  };
+
+  const stopAboutThumbDrag = (
+    event: React.PointerEvent<HTMLButtonElement>,
+  ) => {
+    if (event.pointerId === aboutThumbDrag?.pointerId) {
+      setAboutThumbDrag(null);
+    }
+  };
+
   return (
     <main className="desktop">
       {/* Desktop icons */}
@@ -278,8 +405,13 @@ function App() {
             {/* About Me */}
 
             {windowState.type === "about" && (
-              <div className="about-window-content">
-                <h1>Richmond</h1>
+              <div className="about-window-body">
+                <div
+                  ref={aboutContentRef}
+                  className="about-window-content"
+                  onScroll={updateAboutScrollbar}
+                >
+                  <h1>Richmond</h1>
 
                 <p className="about-role">
                   Electrical & Electronic Engineering Student
@@ -446,9 +578,70 @@ function App() {
 
                 <hr />
 
-                <p className="about-footer">
-                  Thanks for stopping by.
-                </p>
+                  <p className="about-footer">
+                    Thanks for stopping by.
+                  </p>
+                </div>
+
+                <div className="about-scrollbar" aria-label="About Me scrollbar">
+                  <button
+                    type="button"
+                    className="about-scrollbar-button about-scrollbar-button-up"
+                    aria-label="Scroll up"
+                    onMouseDown={(event) => event.stopPropagation()}
+                    onClick={() => scrollAboutBy(-48)}
+                  >
+                    <span aria-hidden="true" />
+                  </button>
+
+                  <div
+                    ref={aboutScrollbarTrackRef}
+                    className="about-scrollbar-track"
+                    onMouseDown={(event) => event.stopPropagation()}
+                    onPointerDown={(event) => {
+                      if (event.target !== event.currentTarget || !aboutMaxScroll) {
+                        return;
+                      }
+
+                      const trackBounds = event.currentTarget.getBoundingClientRect();
+                      const offset = Math.max(
+                        0,
+                        Math.min(
+                          event.clientY - trackBounds.top - aboutThumbHeight / 2,
+                          aboutMaxThumbOffset,
+                        ),
+                      );
+
+                      aboutContentRef.current?.scrollTo({
+                        top: (offset / aboutMaxThumbOffset) * aboutMaxScroll,
+                      });
+                    }}
+                  >
+                    <button
+                      type="button"
+                      className="about-scrollbar-thumb"
+                      aria-label="Drag to scroll"
+                      style={{
+                        height: aboutThumbHeight,
+                        transform: `translateY(${aboutThumbOffset}px)`,
+                      }}
+                      onPointerDown={startAboutThumbDrag}
+                      onPointerMove={dragAboutThumb}
+                      onPointerUp={stopAboutThumbDrag}
+                      onPointerCancel={stopAboutThumbDrag}
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    className="about-scrollbar-button about-scrollbar-button-down"
+                    aria-label="Scroll down"
+                    onMouseDown={(event) => event.stopPropagation()}
+                    onClick={() => scrollAboutBy(48)}
+                  >
+                    <span aria-hidden="true" />
+                  </button>
+                </div>
               </div>
             )}
 
