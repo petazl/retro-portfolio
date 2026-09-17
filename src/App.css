@@ -141,8 +141,12 @@
 }
 
 .desktop-icon-image {
-  font-size: 38px;
-  line-height: 1;
+  width: 48px;
+  height: 48px;
+
+  object-fit: contain;
+
+  image-rendering: pixelated;
 }
 
 .desktop-icon-label {
@@ -173,6 +177,29 @@
   border-bottom: 3px solid #404040;
 
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.retro-window-maximized {
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 42px !important;
+
+  width: auto !important;
+  max-width: none !important;
+
+  box-sizing: border-box;
+
+  box-shadow: none;
+}
+
+.retro-window-maximized .about-window-body {
+  flex: 1;
+  min-height: 0;
+  height: auto;
 }
 
 /* =========================================================
@@ -185,6 +212,7 @@
 }
 
 .window-minimize,
+.window-maximize,
 .window-close {
   width: 22px;
   height: 22px;
@@ -206,6 +234,7 @@
 }
 
 .window-minimize:active,
+.window-maximize:active,
 .window-close:active {
   border-top-color: #404040;
   border-left-color: #404040;
@@ -219,6 +248,7 @@
 
 .window-titlebar {
   height: 30px;
+  flex: 0 0 30px;
 
   padding: 0 4px 0 7px;
 
@@ -240,6 +270,8 @@
 
   cursor: move;
   user-select: none;
+
+  flex: 0 0 30px;
 }
 
 .window-close {
@@ -311,6 +343,10 @@
   display: flex;
 
   box-sizing: border-box;
+}
+
+.retro-window-maximized .about-window-body {
+  height: calc(100% - 38px);
 }
 
 .about-window-content {
@@ -502,7 +538,7 @@
   flex-wrap: wrap;
 }
 
-.social-links button {
+.social-links a {
   padding: 7px 14px;
 
   background: #c0c0c0;
@@ -512,16 +548,21 @@
   border-right: 3px solid #404040;
   border-bottom: 3px solid #404040;
 
+  color: #000;
+  text-decoration: none;
+
   font-weight: bold;
 
   cursor: pointer;
 }
 
-.social-links button:active {
+.social-links a:active {
   border-top-color: #404040;
   border-left-color: #404040;
   border-right-color: white;
   border-bottom-color: white;
+
+  transform: translate(1px, 1px);
 }
 
 /* =========================================================
@@ -554,12 +595,12 @@
   min-width: 120px;
 
   display: flex;
-  align-items: center;
+  align-items:center;
 
   box-sizing: border-box;
 
   padding: 0 10px;
-  margin: 0;
+  margin: 2px;
 
   background: #c0c0c0;
 
@@ -580,6 +621,7 @@
   cursor: pointer;
 
   appearance: none;
+  display: inline-block;
 }
 
 .taskbar-app:active {

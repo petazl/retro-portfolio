@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./App.css";
+import aboutMeIcon from "./assets/about-me.png";  
+import socialIcon from "./assets/social.png";
 
 type WindowType = "about" | "social";
 
@@ -8,8 +10,11 @@ type WindowState = {
   type: WindowType;
   x: number;
   y: number;
+  previousX: number;
+  previousY: number;
   zIndex: number;
   minimized: boolean;
+  maximized: boolean;
 };
 
 type DragState = {
@@ -122,8 +127,11 @@ function App() {
           type,
           x,
           y,
+          previousX: x,
+          previousY: y,
           zIndex: highestZ + 1,
           minimized: false,
+          maximized: false,
         },
       ];
     });
@@ -166,6 +174,32 @@ function App() {
       );
     });
   };
+
+  const toggleMaximize = (id: WindowType) => {
+  setOpenWindows((current) =>
+    current.map((window) => {
+      if (window.id !== id) {
+        return window;
+      }
+
+      if (window.maximized) {
+        return {
+          ...window,
+          x: window.previousX,
+          y: window.previousY,
+          maximized: false,
+        };
+      }
+
+      return {
+        ...window,
+        previousX: window.x,
+        previousY: window.y,
+        maximized: true,
+      };
+    }),
+  );
+};
 
   // Bring a window to the front
   const bringToFront = (id: WindowType) => {
@@ -329,7 +363,11 @@ function App() {
           className="desktop-icon"
           onClick={() => openWindow("about")}
         >
-          <span className="desktop-icon-image">👤</span>
+          <img
+            className="desktop-icon-image"
+            src={aboutMeIcon}
+            alt=""
+          />
           <span className="desktop-icon-label">
             About Me
           </span>
@@ -339,7 +377,7 @@ function App() {
           className="desktop-icon"
           onClick={() => openWindow("social")}
         >
-          <span className="desktop-icon-image">🌐</span>
+          <span className="desktop-icon-image"></span>
           <span className="desktop-icon-label">
             Social
           </span>
@@ -353,7 +391,7 @@ function App() {
         .map((windowState) => (
           <div
             key={windowState.id}
-            className="retro-window"
+            className={`retro-window ${windowState.maximized ? "retro-window-maximized" : ""}`}
             style={{
               left: windowState.x,
               top: windowState.y,
@@ -371,31 +409,31 @@ function App() {
             >
               <span>
                 {windowState.type === "about"
-                  ? "👤 About Me"
-                  : "🌐 Social"}
+                  ? "About Me"
+                  : "Social"}
               </span>
 
               <div className="window-controls">
                 <button
                   className="window-minimize"
-                  onMouseDown={(event) =>
-                    event.stopPropagation()
-                  }
-                  onClick={() =>
-                    minimizeWindow(windowState.id)
-                  }
+                  onMouseDown={(event) => event.stopPropagation()}
+                  onClick={() => minimizeWindow(windowState.id)}
                 >
                   _
                 </button>
 
                 <button
+                  className="window-maximize"
+                  onMouseDown={(event) => event.stopPropagation()}
+                  onClick={() => toggleMaximize(windowState.id)}
+                >
+                  □
+                </button>
+
+                <button
                   className="window-close"
-                  onMouseDown={(event) =>
-                    event.stopPropagation()
-                  }
-                  onClick={() =>
-                    closeWindow(windowState.id)
-                  }
+                  onMouseDown={(event) => event.stopPropagation()}
+                  onClick={() => closeWindow(windowState.id)}
                 >
                   ×
                 </button>
@@ -658,9 +696,29 @@ function App() {
                 <hr />
 
                 <div className="social-links">
-                  <button>GitHub</button>
-                  <button>LinkedIn</button>
-                  <button>Instagram</button>
+                  <a
+                    href="https://github.com/petazl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/in/richmond-kyawzay-9772b8288/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+
+                  <a
+                    href="https://www.instagram.com/petazled/?hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Instagram
+                  </a>
                 </div>
               </div>
             )}
@@ -671,7 +729,7 @@ function App() {
 
       <div className="taskbar">
         <button className="start-button">
-          🪟 <strong>Start</strong>
+          <strong>Start</strong>
         </button>
 
         <div className="taskbar-windows">
@@ -686,14 +744,24 @@ function App() {
               onClick={() => {
                 if (windowState.minimized) {
                   restoreWindow(windowState.id);
+                  return;
+                }
+
+                const highestZ = Math.max(
+                  ...openWindows.map((window) => window.zIndex),
+                  0,
+                );
+
+                if (windowState.zIndex === highestZ) {
+                  minimizeWindow(windowState.id);
                 } else {
                   bringToFront(windowState.id);
                 }
               }}
             >
               {windowState.type === "about"
-                ? "👤 About Me"
-                : "🌐 Social"}
+                ? "About Me"
+                : "Social"}
             </button>
           ))}
         </div>
