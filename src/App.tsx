@@ -1257,7 +1257,22 @@ function App() {
 
                   <div className="music-track-info">
                     <div className="music-track-title">
-                      {currentTrack.title}
+                      <div className="music-track-title-scroll">
+                        <span>{currentTrack.title}</span>
+                        <span className="music-track-separator" aria-hidden="true">
+                          •
+                        </span>
+
+                        <span aria-hidden="true">{currentTrack.title}</span>
+                        <span className="music-track-separator" aria-hidden="true">
+                          •
+                        </span>
+
+                        <span aria-hidden="true">{currentTrack.title}</span>
+                        <span className="music-track-separator" aria-hidden="true">
+                          •
+                        </span>
+                      </div>
                     </div>
 
                     <div className="music-track-artist">
