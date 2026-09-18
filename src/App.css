@@ -301,10 +301,10 @@
 
   background: #d4d0c8;
 
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #404040;
-  border-bottom: 2px solid #404040;
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
 
   display: flex;
   flex-direction: column;
@@ -539,9 +539,9 @@
   background:
     radial-gradient(
       circle at 50% 40%,
-      #dddddd 0%,
-      #dddddd 45%,
-      #dddddd 100%
+      #d4d0c8 0%,
+      #d4d0c8 45%,
+      #d4d0c8 100%
     );
 
   border-top: 2px solid #404040;
@@ -606,9 +606,9 @@
   background:
     radial-gradient(
       circle at 50% 40%,
-      #dddddd 0%,
-      #dddddd 45%,
-      #dddddd 100%
+      #d4d0c8 0%,
+      #d4d0c8 45%,
+      #d4d0c8 100%
     );
 
   border-top: 2px solid #404040;
