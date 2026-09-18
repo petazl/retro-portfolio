@@ -196,6 +196,11 @@
   height: auto;
 }
 
+.retro-window-maximized .window-content {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+}
 /* =========================================================
    Window controls
    ========================================================= */
@@ -266,6 +271,226 @@
   user-select: none;
 }
 
+/* --------------------------------
+   Music Player
+-------------------------------- */
+
+.retro-window:has(.music-window-content) {
+  width: 320px;
+  height: 300px;
+}
+
+.retro-window.retro-window-maximized:has(.music-window-content) {
+  width: auto;
+  height: auto;
+}
+
+.music-window-content {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+  background: #a8a8a8;
+}
+
+.music-screen {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+
+.music-cd {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.music-track-info {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+
+.music-track-title {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-track-artist {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+/* --------------------------------
+   Windows 98 Progress Bar
+-------------------------------- */
+
+.music-progress-area {
+  width: 100%;
+  margin-top: 2px;
+}
+
+.music-progress {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 100%;
+  height: 18px;
+
+  margin: 0;
+  padding: 2px;
+
+  box-sizing: border-box;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  cursor: pointer;
+}
+
+/* Chrome / Edge / Chromium */
+
+.music-progress::-webkit-slider-runnable-track {
+  height: 10px;
+  background: #c0c0c0;
+}
+
+.music-progress::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 10px;
+  height: 14px;
+
+  margin-top: -2px;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  cursor: pointer;
+}
+
+/* Firefox */
+
+.music-progress::-moz-range-track {
+  height: 10px;
+  background: #c0c0c0;
+}
+
+.music-progress::-moz-range-thumb {
+  width: 10px;
+  height: 14px;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  border-radius: 0;
+
+  cursor: pointer;
+}
+
+/* --------------------------------
+   Time
+-------------------------------- */
+
+.music-time {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 2px;
+
+  font-size: 11px;
+}
+
+/* --------------------------------
+   Windows 98 Transport Buttons
+-------------------------------- */
+
+.music-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 4px;
+
+  margin-top: auto;
+}
+
+.music-controls button {
+  box-sizing: border-box;
+
+  min-width: 42px;
+  height: 30px;
+
+  padding: 2px 8px;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+
+  color: #000000;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-controls button:hover {
+  background: #dcd8d0;
+}
+
+.music-controls button:active {
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  padding-top: 3px;
+  padding-left: 9px;
+}
+
+.music-controls .music-play-button {
+  min-width: 46px;
+  font-size: 14px;
+}
+
 /* =========================================================
    Window content
    ========================================================= */
@@ -278,9 +503,9 @@
   background:
     radial-gradient(
       circle at 50% 40%,
-      #0ebdbd 0%,
-      #13afaf 45%,
-      #15a8a8 100%
+      #dddddd 0%,
+      #dddddd 45%,
+      #dddddd 100%
     );
 
   border-top: 2px solid #404040;
@@ -345,15 +570,15 @@
   background:
     radial-gradient(
       circle at 50% 40%,
-      #dcdddd 0%,
-      #d2d3d3 45%,
-      #d1d3d3 100%
+      #dddddd 0%,
+      #dddddd 45%,
+      #dddddd 100%
     );
 
-  border-top: 3px solid #404040;
-  border-left: 3px solid #404040;
-  border-right: 3px solid #ffffff;
-  border-bottom: 3px solid #ffffff;
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
 
   scrollbar-width: none;
 }
@@ -613,7 +838,7 @@
 
   box-sizing: border-box;
 
-  padding: 0 10px;
+  padding: 0 8px;
   margin: 0;
 
   background: #c0c0c0;
@@ -644,6 +869,18 @@
   border-bottom-color: #ffffff;
 
   transform: translate(1px, 1px);
+}
+
+.taskbar-app-icon {
+  width: 22px;
+  height: 22px;
+
+  margin-right: 7px;
+
+  object-fit: contain;
+  image-rendering: pixelated;
+
+  flex: 0 0 auto;
 }
 
 .taskbar-clock {
@@ -699,3 +936,4 @@
 
   transform: translate(1px, 1px);
 }
+
