@@ -1,4 +1,7 @@
-/* Pixelify Sans */
+/* =========================================================
+   Pixelify Sans
+   ========================================================= */
+
 @import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap");
 
 /* =========================================================
@@ -40,11 +43,10 @@
 
 *::-webkit-scrollbar-thumb {
   background: #c0c0c0;
-
   min-height: 28px;
 
-  border-top: 2px solid white;
-  border-left: 2px solid white;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
   border-right: 2px solid #404040;
   border-bottom: 2px solid #404040;
 }
@@ -52,8 +54,8 @@
 *::-webkit-scrollbar-thumb:active {
   border-top-color: #404040;
   border-left-color: #404040;
-  border-right-color: white;
-  border-bottom-color: white;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
 }
 
 *::-webkit-scrollbar-button {
@@ -64,25 +66,25 @@
 
   background: #c0c0c0;
 
-  border-top: 2px solid white;
-  border-left: 2px solid white;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
   border-right: 2px solid #404040;
   border-bottom: 2px solid #404040;
+}
+
+*::-webkit-scrollbar-button:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #404040;
 }
 
 *::-webkit-scrollbar-corner {
   background: #c0c0c0;
 }
 
-*::-webkit-scrollbar-button:active {
-  border-top-color: #404040;
-  border-left-color: #404040;
-  border-right-color: white;
-  border-bottom-color: white;
-}
-
 /* =========================================================
-   Desktop / game layer
+   Desktop
    ========================================================= */
 
 .desktop {
@@ -92,16 +94,8 @@
   position: relative;
   overflow: hidden;
 
-  background:
-    radial-gradient(
-      circle at 50% 40%,
-      #159090 0%,
-      #087878 45%,
-      #006666 100%
-    );
-
   font-family: "Pixelify Sans", sans-serif;
-  color: #000;
+  color: #000000;
 }
 
 /* =========================================================
@@ -122,7 +116,7 @@
   border-radius: 2px;
 
   background: transparent;
-  color: white;
+  color: #ffffff;
 
   cursor: pointer;
 
@@ -155,8 +149,8 @@
   font-size: 14px;
 
   text-shadow:
-    1px 1px 0 #000,
-    -1px 0 0 #000;
+    1px 1px 0 #000000,
+    -1px 0 0 #000000;
 }
 
 /* =========================================================
@@ -169,7 +163,7 @@
   width: 620px;
   max-width: calc(100vw - 40px);
 
-  background: #c0c0c0;
+  background: #a8a8a8;
 
   border-top: 3px solid #ffffff;
   border-left: 3px solid #ffffff;
@@ -221,8 +215,8 @@
 
   background: #c0c0c0;
 
-  border-top: 3px solid white;
-  border-left: 3px solid white;
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
   border-right: 3px solid #404040;
   border-bottom: 3px solid #404040;
 
@@ -238,8 +232,8 @@
 .window-close:active {
   border-top-color: #404040;
   border-left-color: #404040;
-  border-right-color: white;
-  border-bottom-color: white;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
 }
 
 /* =========================================================
@@ -263,42 +257,13 @@
     #000080 100%
   );
 
-  color: white;
+  color: #ffffff;
 
   font-size: 14px;
   font-weight: bold;
 
   cursor: move;
   user-select: none;
-
-  flex: 0 0 30px;
-}
-
-.window-close {
-  width: 22px;
-  height: 22px;
-
-  padding: 0;
-
-  background: #c0c0c0;
-
-  border-top: 3px solid white;
-  border-left: 3px solid white;
-  border-right: 3px solid #404040;
-  border-bottom: 3px solid #404040;
-
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 16px;
-
-  cursor: pointer;
-}
-
-.window-close:active {
-  border-top-color: #404040;
-  border-left-color: #404040;
-  border-right-color: white;
-  border-bottom-color: white;
 }
 
 /* =========================================================
@@ -306,7 +271,24 @@
    ========================================================= */
 
 .window-content {
+  margin: 3px;
+
   padding: 24px;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #0ebdbd 0%,
+      #13afaf 45%,
+      #15a8a8 100%
+    );
+
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  box-sizing: border-box;
 }
 
 .window-content h1 {
@@ -328,13 +310,13 @@
   border: none;
 
   border-top: 2px solid #808080;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #ffffff;
 
   margin: 18px 0;
 }
 
 /* =========================================================
-   About window content
+   About window
    ========================================================= */
 
 .about-window-body {
@@ -343,10 +325,10 @@
   display: flex;
 
   box-sizing: border-box;
-}
 
-.retro-window-maximized .about-window-body {
-  height: calc(100% - 38px);
+  padding: 4px;
+
+  background: #a8a8a8;
 }
 
 .about-window-content {
@@ -358,7 +340,20 @@
 
   box-sizing: border-box;
 
-  padding: 24px 22px 24px 24px;
+  padding: 20px 18px 20px 20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #dcdddd 0%,
+      #d2d3d3 45%,
+      #d1d3d3 100%
+    );
+
+  border-top: 3px solid #404040;
+  border-left: 3px solid #404040;
+  border-right: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
 
   scrollbar-width: none;
 }
@@ -368,6 +363,10 @@
   height: 0;
 }
 
+/* =========================================================
+   Custom About scrollbar
+   ========================================================= */
+
 .about-scrollbar {
   width: 20px;
   flex: 0 0 20px;
@@ -376,6 +375,9 @@
   grid-template-rows: 20px minmax(0, 1fr) 20px;
 
   background: #c0c0c0;
+
+  position: relative;
+  z-index: 2;
 }
 
 .about-scrollbar-button,
@@ -432,6 +434,7 @@
   overflow: hidden;
 
   background-color: #ffffff;
+
   background-image: repeating-linear-gradient(
     -45deg,
     #c0c0c0 0,
@@ -459,6 +462,10 @@
   border-right-color: #ffffff;
   border-bottom-color: #ffffff;
 }
+
+/* =========================================================
+   About typography
+   ========================================================= */
 
 .about-role {
   margin-top: 0;
@@ -543,12 +550,12 @@
 
   background: #c0c0c0;
 
-  border-top: 3px solid white;
-  border-left: 3px solid white;
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
   border-right: 3px solid #404040;
   border-bottom: 3px solid #404040;
 
-  color: #000;
+  color: #000000;
   text-decoration: none;
 
   font-weight: bold;
@@ -559,8 +566,8 @@
 .social-links a:active {
   border-top-color: #404040;
   border-left-color: #404040;
-  border-right-color: white;
-  border-bottom-color: white;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
 
   transform: translate(1px, 1px);
 }
@@ -587,7 +594,14 @@
 
   background: #c0c0c0;
 
-  border-top: 2px solid white;
+  border-top: 2px solid #ffffff;
+}
+
+.taskbar-windows {
+  display: flex;
+  align-items: center;
+
+  gap: 2px;
 }
 
 .taskbar-app {
@@ -595,23 +609,23 @@
   min-width: 120px;
 
   display: flex;
-  align-items:center;
+  align-items: center;
 
   box-sizing: border-box;
 
   padding: 0 10px;
-  margin: 2px;
+  margin: 0;
 
   background: #c0c0c0;
 
   border: none;
 
-  border-top: 3px solid white;
-  border-left: 3px solid white;
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
   border-right: 3px solid #404040;
   border-bottom: 3px solid #404040;
 
-  color: #000;
+  color: #000000;
 
   font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
 
@@ -621,14 +635,13 @@
   cursor: pointer;
 
   appearance: none;
-  display: inline-block;
 }
 
 .taskbar-app:active {
   border-top-color: #404040;
   border-left-color: #404040;
-  border-right-color: white;
-  border-bottom-color: white;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
 
   transform: translate(1px, 1px);
 }
@@ -640,6 +653,18 @@
   align-items: center;
 
   box-sizing: border-box;
+
+  margin-left: auto;
+  padding: 0 12px;
+
+  border-top: 3px solid #808080;
+  border-left: 3px solid #808080;
+  border-right: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+
+  font-size: 13px;
+
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
 }
 
 .start-button {
@@ -656,8 +681,8 @@
 
   background: #c0c0c0;
 
-  border-top: 3px solid white;
-  border-left: 3px solid white;
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
   border-right: 3px solid #404040;
   border-bottom: 3px solid #404040;
 
@@ -669,23 +694,8 @@
 .start-button:active {
   border-top-color: #404040;
   border-left-color: #404040;
-  border-right-color: white;
-  border-bottom-color: white;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
 
   transform: translate(1px, 1px);
-}
-
-.taskbar-clock {
-  margin-left: auto;
-
-  padding: 0 12px;
-
-  border-top: 3px solid #808080;
-  border-left: 3px solid #808080;
-  border-right: 3px solid white;
-  border-bottom: 3px solid white;
-
-  font-size: 13px;
-
-  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
 }

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import "./App.css";
 import aboutMeIcon from "./assets/about-me.png";  
 import socialIcon from "./assets/social.png";
+import desktopBackground from "./assets/desktop-background.png";
 
 type WindowType = "about" | "social";
 
@@ -355,8 +356,15 @@ function App() {
   };
 
   return (
-    <main className="desktop">
-      {/* Desktop icons */}
+    <main
+      className="desktop"
+      style={{
+        backgroundImage: `url(${desktopBackground})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
 
       <div className="desktop-icons">
         <button
