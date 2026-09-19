@@ -102,15 +102,16 @@ function App() {
   -------------------------------- */
 
   const audioRef = useRef<HTMLAudioElement>(null);
-
-  // Used to tell the track-change effect whether the new track
-  // should automatically start playing.
   const shouldAutoplayRef = useRef(false);
+  const volumeHoverTimeoutRef = useRef<number | null>(null);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioTime, setAudioTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showVolumePopup, setShowVolumePopup] = useState(false);
 
   const currentTrack = playlist[currentTrackIndex];
 
@@ -287,6 +288,14 @@ function App() {
     void playNewTrack();
   }, [currentTrackIndex]);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    audio.volume = isMuted ? 0 : volume;
+  }, [volume, isMuted]);
+
   /* --------------------------------
      Live clock
   -------------------------------- */
@@ -364,6 +373,18 @@ function App() {
   };
 
   const closeWindow = (id: WindowType) => {
+    if (id === "music") {
+      const audio = audioRef.current;
+
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+
+      setIsPlaying(false);
+      setAudioTime(0);
+    }
+
     setOpenWindows((current) =>
       current.filter((window) => window.id !== id),
     );
@@ -817,20 +838,23 @@ function App() {
                 >
                   _
                 </button>
-
-                <button
-                  className="window-maximize"
-                  onMouseDown={(event) =>
-                    event.stopPropagation()
-                  }
-                  onClick={() =>
-                    toggleMaximize(
-                      windowState.id,
-                    )
-                  }
-                >
-                  □
-                </button>
+                    
+                {windowState.type !== "music" && 
+                   windowState.type !== "social" && (
+                  <button
+                    className="window-maximize"
+                    onMouseDown={(event) =>
+                      event.stopPropagation()
+                    }
+                    onClick={() =>
+                      toggleMaximize(
+                        windowState.id,
+                      )
+                    }
+                  >
+                    □
+                  </button>
+                )}
 
                 <button
                   className="window-close"
@@ -1258,19 +1282,16 @@ function App() {
                   <div className="music-track-info">
                     <div className="music-track-title">
                       <div className="music-track-title-scroll">
-                        <span>{currentTrack.title}</span>
-                        <span className="music-track-separator" aria-hidden="true">
-                          •
+                        <span className="music-track-title-sequence">
+                          {currentTrack.title} <b>•</b> {currentTrack.title} <b>•</b>{" "}
+                          {currentTrack.title} <b>•</b> {currentTrack.title} <b>•</b>{" "}
+                          {currentTrack.title} <b>•</b>
                         </span>
 
-                        <span aria-hidden="true">{currentTrack.title}</span>
-                        <span className="music-track-separator" aria-hidden="true">
-                          •
-                        </span>
-
-                        <span aria-hidden="true">{currentTrack.title}</span>
-                        <span className="music-track-separator" aria-hidden="true">
-                          •
+                        <span className="music-track-title-sequence" aria-hidden="true">
+                          {currentTrack.title} <b>•</b> {currentTrack.title} <b>•</b>{" "}
+                          {currentTrack.title} <b>•</b> {currentTrack.title} <b>•</b>{" "}
+                          {currentTrack.title} <b>•</b>
                         </span>
                       </div>
                     </div>
@@ -1412,6 +1433,61 @@ function App() {
               </button>
             ),
           )}
+        </div>
+
+        <div className="taskbar-volume-area">
+          {showVolumePopup && (
+            <div
+              className="taskbar-volume-popup"
+              onMouseEnter={() => {
+                if (volumeHoverTimeoutRef.current !== null) {
+                  window.clearTimeout(volumeHoverTimeoutRef.current);
+                  volumeHoverTimeoutRef.current = null;
+                }
+              }}
+              onMouseLeave={() => {
+                setShowVolumePopup(false);
+              }}
+            >
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={isMuted ? 0 : volume}
+                onChange={(event) => {
+                  const newVolume = Number(event.target.value);
+
+                  setVolume(newVolume);
+
+                  if (newVolume > 0) {
+                    setIsMuted(false);
+                  }
+                }}
+                aria-label="Volume"
+              />
+            </div>
+          )}
+
+          <button
+            type="button"
+            className="taskbar-volume-button"
+            onClick={() => setIsMuted((current) => !current)}
+            onMouseEnter={() => {
+              volumeHoverTimeoutRef.current = window.setTimeout(() => {
+                setShowVolumePopup(true);
+              }, 1500);
+            }}
+            onMouseLeave={() => {
+              if (volumeHoverTimeoutRef.current !== null) {
+                window.clearTimeout(volumeHoverTimeoutRef.current);
+                volumeHoverTimeoutRef.current = null;
+              }
+            }}
+            title={isMuted ? "Unmute" : "Mute"}
+          >
+            {isMuted ? "🔇" : "🔊"}
+          </button>
         </div>
 
         <div className="taskbar-clock">
