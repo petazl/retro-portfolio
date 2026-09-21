@@ -102,10 +102,10 @@ function App() {
   -------------------------------- */
 
   const audioRef = useRef<HTMLAudioElement>(null);
-  const shouldAutoplayRef = useRef(false);
+  const shouldAutoplayRef = useRef(true);
   const volumeHoverTimeoutRef = useRef<number | null>(null);
   
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(4);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioTime, setAudioTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -135,7 +135,19 @@ function App() {
      Windows
   -------------------------------- */
 
-  const [openWindows, setOpenWindows] = useState<WindowState[]>([]);
+  const [openWindows, setOpenWindows] = useState<WindowState[]>([
+    {
+      id: "music",
+      type: "music",
+      x: window.innerWidth - 340,
+      y: 10,
+      previousX: window.innerWidth - 340,
+      previousY: 10,
+      zIndex: 1,
+      minimized: false,
+      maximized: false,
+    },
+  ]);
 
   const [dragging, setDragging] = useState<DragState | null>(null);
 
@@ -276,7 +288,11 @@ function App() {
 
     audio.load();
 
-    if (!shouldAutoplayRef.current) {
+    const shouldPlay =
+      shouldAutoplayRef.current ||
+      currentTrackIndex === 4;
+
+    if (!shouldPlay) {
       return;
     }
 
@@ -299,13 +315,33 @@ function App() {
   }, [currentTrackIndex]);
 
   useEffect(() => {
-    const audio = audioRef.current;
+    const startMusicOnInteraction = () => {
+      const audio = audioRef.current;
 
-    if (!audio) return;
+      if (!audio || !audio.paused) {
+        return;
+      }
 
-    audio.volume = isMuted ? 0 : volume;
-  }, [volume, isMuted]);
+      void audio.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        // Browser still refused playback.
+      });
+    };
 
+    window.addEventListener(
+      "pointerdown",
+      startMusicOnInteraction,
+      { once: true },
+    );
+
+    return () => {
+      window.removeEventListener(
+        "pointerdown",
+        startMusicOnInteraction,
+      );
+    };
+  }, []);
   /* --------------------------------
      Live clock
   -------------------------------- */

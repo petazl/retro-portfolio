@@ -99,6 +99,8 @@
 
   font-family: "Pixelify Sans", sans-serif;
   color: #000000;
+
+  filter: saturate(0.88) brightness(0.92);
 }
 
 
@@ -1074,7 +1076,7 @@
 
   right: 0;
 
-  bottom: calc(100% + 4px);
+  bottom: 100%;
 
   width: 34px;
   height: 110px;
@@ -1192,4 +1194,82 @@
   font-size: 13px;
 
   font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+}
+
+/* =========================
+   CRT MONITOR EFFECT
+   ========================= */
+
+.desktop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+
+  /* Fine animated scanlines */
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.045) 0px,
+      rgba(0, 0, 0, 0.045) 1px,
+      rgba(255, 255, 255, 0.015) 2px,
+      rgba(255, 255, 255, 0.015) 3px
+    );
+
+  background-size: 100% 3px;
+
+  animation: crt-scanlines 0.18s linear infinite;
+}
+
+@keyframes crt-scanlines {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 3px;
+  }
+}
+
+
+/* =========================
+   CRT HUM BAR
+   ========================= */
+
+.desktop::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: 9999;
+  pointer-events: none;
+
+  /* Subtle power-supply ripple / hum bar */
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 47.5%,
+      rgba(255, 255, 255, 0.012) 48.5%,
+      rgba(255, 255, 255, 0.035) 49.5%,
+      rgba(255, 255, 255, 0.012) 50.5%,
+      transparent 52.5%,
+      transparent 100%
+    );
+
+  animation: crt-hum-bar 5s linear infinite;
+
+  /* Subtle darkening around the edges */
+  box-shadow:
+    inset 0 0 80px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes crt-hum-bar {
+  from {
+    transform: translateY(-55%);
+  }
+
+  to {
+    transform: translateY(55%);
+  }
 }
