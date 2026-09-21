@@ -104,13 +104,23 @@ function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const shouldAutoplayRef = useRef(false);
   const volumeHoverTimeoutRef = useRef<number | null>(null);
-
+  
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioTime, setAudioTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
+  const toggleMute = () => {
+    const audio = audioRef.current;
+
+    if (!audio) {
+      return;
+    }
+
+    audio.muted = !audio.muted;
+    setIsMuted(audio.muted);
+  };
   const [showVolumePopup, setShowVolumePopup] = useState(false);
 
   const currentTrack = playlist[currentTrackIndex];
@@ -769,9 +779,11 @@ function App() {
           className="desktop-icon"
           onClick={() => openWindow("music")}
         >
-          <span className="desktop-icon-image">
-            🎵
-          </span>
+          <img
+            className="desktop-icon-image"
+            src={windows98Cd}
+            alt=""
+          />
 
           <span className="desktop-icon-label">
             Music
@@ -1407,11 +1419,12 @@ function App() {
                   }
                 }}
               >
-                {windowState.type ===
-                "music" ? (
-                  <span className="taskbar-app-icon">
-                    🎵
-                  </span>
+                {windowState.type === "music" ? (
+                  <img
+                    className="taskbar-app-icon"
+                    src={windows98Cd}
+                    alt=""
+                  />
                 ) : (
                   <img
                     className="taskbar-app-icon"
@@ -1435,44 +1448,9 @@ function App() {
           )}
         </div>
 
-        <div className="taskbar-volume-area">
-          {showVolumePopup && (
-            <div
-              className="taskbar-volume-popup"
-              onMouseEnter={() => {
-                if (volumeHoverTimeoutRef.current !== null) {
-                  window.clearTimeout(volumeHoverTimeoutRef.current);
-                  volumeHoverTimeoutRef.current = null;
-                }
-              }}
-              onMouseLeave={() => {
-                setShowVolumePopup(false);
-              }}
-            >
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={isMuted ? 0 : volume}
-                onChange={(event) => {
-                  const newVolume = Number(event.target.value);
-
-                  setVolume(newVolume);
-
-                  if (newVolume > 0) {
-                    setIsMuted(false);
-                  }
-                }}
-                aria-label="Volume"
-              />
-            </div>
-          )}
-
-          <button
-            type="button"
-            className="taskbar-volume-button"
-            onClick={() => setIsMuted((current) => !current)}
+        <div className="taskbar-system-tray">
+          <div
+            className="volume-control"
             onMouseEnter={() => {
               volumeHoverTimeoutRef.current = window.setTimeout(() => {
                 setShowVolumePopup(true);
@@ -1483,22 +1461,58 @@ function App() {
                 window.clearTimeout(volumeHoverTimeoutRef.current);
                 volumeHoverTimeoutRef.current = null;
               }
-            }}
-            title={isMuted ? "Unmute" : "Mute"}
-          >
-            {isMuted ? "🔇" : "🔊"}
-          </button>
-        </div>
 
-        <div className="taskbar-clock">
-          {clockTime.toLocaleTimeString(
-            [],
-            {
+              setShowVolumePopup(false);
+            }}
+          >
+            <button
+              type="button"
+              className="volume-button"
+              onClick={toggleMute}
+              title={isMuted ? "Unmute" : "Mute"}
+            >
+              {isMuted ? "🔇" : "🔊"}
+            </button>
+
+            {showVolumePopup && (
+              <div className="volume-popup">
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={isMuted ? 0 : volume}
+                  onChange={(event) => {
+                    const newVolume = Number(event.target.value);
+
+                    setVolume(newVolume);
+
+                    if (audioRef.current) {
+                      audioRef.current.volume = newVolume;
+
+                      if (newVolume > 0) {
+                        audioRef.current.muted = false;
+                        setIsMuted(false);
+                      } else {
+                        audioRef.current.muted = true;
+                        setIsMuted(true);
+                      }
+                    }
+                  }}
+                  className="volume-slider"
+                  aria-label="Volume"
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="taskbar-clock">
+            {clockTime.toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",
               hour12: false,
-            },
-          )}
+            })}
+          </div>
         </div>
       </div>
     </main>

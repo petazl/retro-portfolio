@@ -4,6 +4,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap");
 
+
 /* =========================================================
    Global fonts
    ========================================================= */
@@ -15,6 +16,7 @@
 .retro-window {
   font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
 }
+
 
 /* =========================================================
    Global Windows 95/98-style scrollbars
@@ -76,12 +78,13 @@
   border-top-color: #404040;
   border-left-color: #404040;
   border-right-color: #ffffff;
-  border-bottom-color: #404040;
+  border-bottom-color: #ffffff;
 }
 
 *::-webkit-scrollbar-corner {
   background: #c0c0c0;
 }
+
 
 /* =========================================================
    Desktop
@@ -97,6 +100,7 @@
   font-family: "Pixelify Sans", sans-serif;
   color: #000000;
 }
+
 
 /* =========================================================
    Desktop icons
@@ -153,6 +157,7 @@
     -1px 0 0 #000000;
 }
 
+
 /* =========================================================
    Windows
    ========================================================= */
@@ -201,6 +206,8 @@
   min-height: 0;
   height: auto;
 }
+
+
 /* =========================================================
    Window controls
    ========================================================= */
@@ -241,6 +248,7 @@
   border-bottom-color: #ffffff;
 }
 
+
 /* =========================================================
    Window title bar
    ========================================================= */
@@ -271,9 +279,10 @@
   user-select: none;
 }
 
-/* --------------------------------
+
+/* =========================================================
    Music Player
--------------------------------- */
+   ========================================================= */
 
 .retro-window:has(.music-window-content) {
   width: 320px;
@@ -288,15 +297,20 @@
 .music-window-content {
   width: 100%;
   height: 100%;
+
   box-sizing: border-box;
+
   padding: 4px;
+
   background: #a8a8a8;
 }
 
 .music-screen {
   width: 100%;
   height: 100%;
+
   box-sizing: border-box;
+
   padding: 12px;
 
   background: #d4d0c8;
@@ -309,45 +323,64 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   gap: 7px;
 }
 
 .music-cd {
   width: 90px;
   height: 90px;
+
   object-fit: contain;
+
   flex-shrink: 0;
 }
 
 .music-track-info {
   width: 100%;
   min-width: 0;
+
   text-align: center;
 }
 
+
+/* =========================================================
+   Music title marquee
+   ========================================================= */
+
 .music-track-title {
   width: 100%;
+
   overflow: hidden;
+
   white-space: nowrap;
+
   font-weight: bold;
 }
 
 .music-track-title-scroll {
   display: flex;
+
   width: max-content;
+
   white-space: nowrap;
+
   animation: music-title-scroll 18s linear infinite;
 }
 
 .music-track-title-sequence {
   display: inline-flex;
+
   align-items: center;
+
   flex-shrink: 0;
 }
 
 .music-track-title-sequence b {
   display: inline-block;
+
   margin: 0 10px;
+
   font-weight: normal;
 }
 
@@ -361,31 +394,20 @@
   }
 }
 
-.music-track-separator {
-  margin-left: 14px;
-  margin-right: 14px;
-}
-
-.music-track-title-text {
-  display: inline-flex;
-  white-space: nowrap;
-}
-
-.music-track-title-text span {
-  display: inline-block;
-}
-
 .music-track-artist {
   margin-top: 2px;
+
   font-size: 12px;
 }
 
-/* --------------------------------
+
+/* =========================================================
    Windows 98 Progress Bar
--------------------------------- */
+   ========================================================= */
 
 .music-progress-area {
   width: 100%;
+
   margin-top: 2px;
 }
 
@@ -411,10 +433,12 @@
   cursor: pointer;
 }
 
+
 /* Chrome / Edge / Chromium */
 
 .music-progress::-webkit-slider-runnable-track {
   height: 10px;
+
   background: #c0c0c0;
 }
 
@@ -437,10 +461,12 @@
   cursor: pointer;
 }
 
+
 /* Firefox */
 
 .music-progress::-moz-range-track {
   height: 10px;
+
   background: #c0c0c0;
 }
 
@@ -460,12 +486,14 @@
   cursor: pointer;
 }
 
-/* --------------------------------
-   Time
--------------------------------- */
+
+/* =========================================================
+   Music time
+   ========================================================= */
 
 .music-time {
   display: flex;
+
   justify-content: space-between;
 
   margin-top: 2px;
@@ -473,12 +501,14 @@
   font-size: 11px;
 }
 
-/* --------------------------------
+
+/* =========================================================
    Windows 98 Transport Buttons
--------------------------------- */
+   ========================================================= */
 
 .music-controls {
   display: flex;
+
   justify-content: center;
   align-items: center;
 
@@ -503,6 +533,7 @@
   border-bottom: 2px solid #404040;
 
   font-family: "MS Sans Serif", sans-serif;
+
   font-size: 13px;
   font-weight: normal;
 
@@ -531,8 +562,10 @@
 
 .music-controls .music-play-button {
   min-width: 46px;
+
   font-size: 14px;
 }
+
 
 /* =========================================================
    Window content
@@ -583,6 +616,7 @@
   margin: 18px 0;
 }
 
+
 /* =========================================================
    About window
    ========================================================= */
@@ -631,6 +665,7 @@
   height: 0;
 }
 
+
 /* =========================================================
    Custom About scrollbar
    ========================================================= */
@@ -640,11 +675,13 @@
   flex: 0 0 20px;
 
   display: grid;
+
   grid-template-rows: 20px minmax(0, 1fr) 20px;
 
   background: #c0c0c0;
 
   position: relative;
+
   z-index: 2;
 }
 
@@ -731,6 +768,7 @@
   border-bottom-color: #ffffff;
 }
 
+
 /* =========================================================
    About typography
    ========================================================= */
@@ -781,6 +819,7 @@
 
 .about-tags {
   display: flex;
+
   flex-wrap: wrap;
 
   gap: 6px;
@@ -802,12 +841,14 @@
   font-style: italic;
 }
 
+
 /* =========================================================
    Social
    ========================================================= */
 
 .social-links {
   display: flex;
+
   gap: 10px;
 
   flex-wrap: wrap;
@@ -824,6 +865,7 @@
   border-bottom: 3px solid #404040;
 
   color: #000000;
+
   text-decoration: none;
 
   font-weight: bold;
@@ -839,6 +881,7 @@
 
   transform: translate(1px, 1px);
 }
+
 
 /* =========================================================
    Taskbar
@@ -863,10 +906,56 @@
   background: #c0c0c0;
 
   border-top: 2px solid #ffffff;
+
+  box-sizing: border-box;
 }
+
+
+/* =========================================================
+   Start button
+   ========================================================= */
+
+.start-button {
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  box-sizing: border-box;
+
+  padding: 0 10px;
+
+  background: #c0c0c0;
+
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #404040;
+  border-bottom: 3px solid #404040;
+
+  cursor: pointer;
+
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+}
+
+.start-button:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+
+  transform: translate(1px, 1px);
+}
+
+
+/* =========================================================
+   Taskbar application buttons
+   ========================================================= */
 
 .taskbar-windows {
   display: flex;
+
   align-items: center;
 
   gap: 2px;
@@ -874,6 +963,7 @@
 
 .taskbar-app {
   height: 32px;
+
   min-width: 120px;
 
   display: flex;
@@ -921,20 +1011,177 @@
   margin-right: 7px;
 
   object-fit: contain;
+
   image-rendering: pixelated;
 
   flex: 0 0 auto;
 }
 
-.taskbar-clock {
-  height: 32px;
+
+/* =========================================================
+   System tray
+   ========================================================= */
+
+.taskbar-system-tray {
+  display: flex;
+
+  align-items: center;
+
+  height: 100%;
+
+  margin-left: auto;
+}
+
+
+/* =========================================================
+   Volume control
+   ========================================================= */
+
+.volume-control {
+  position: relative;
+
+  height: 100%;
 
   display: flex;
   align-items: center;
+}
+
+.volume-button {
+  width: 34px;
+  height: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.volume-popup {
+  position: absolute;
+
+  right: 0;
+
+  bottom: calc(100% + 4px);
+
+  width: 34px;
+  height: 110px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+
+  z-index: 9999;
+}
+
+.volume-slider {
+  width: 90px;
+
+  transform: rotate(-90deg);
+}
+ 
+
+/* =========================================================
+   Volume slider
+   ========================================================= */
+
+.volume-slider {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 90px;
+  height: 18px;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  height: 4px;
+
+  background: #808080;
+
+  border-top: 1px solid #404040;
+  border-left: 1px solid #404040;
+  border-bottom: 1px solid #ffffff;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 12px;
+  height: 18px;
+
+  margin-top: -7px;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+}
+
+.volume-slider::-moz-range-track {
+  height: 4px;
+
+  background: #808080;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 18px;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  border-radius: 0;
+}
+
+
+/* =========================================================
+   Taskbar clock
+   ========================================================= */
+
+.taskbar-clock {
+  height: calc(100% - 6px);
+
+  min-width: 72px;
+
+  margin: 3px 3px 3px 2px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
 
   box-sizing: border-box;
 
-  margin-left: auto;
   padding: 0 12px;
 
   border-top: 3px solid #808080;
@@ -946,128 +1193,3 @@
 
   font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
 }
-
-.start-button {
-  height: 32px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 4px;
-
-  box-sizing: border-box;
-
-  padding: 0 10px;
-
-  background: #c0c0c0;
-
-  border-top: 3px solid #ffffff;
-  border-left: 3px solid #ffffff;
-  border-right: 3px solid #404040;
-  border-bottom: 3px solid #404040;
-
-  cursor: pointer;
-
-  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
-}
-
-.start-button:active {
-  border-top-color: #404040;
-  border-left-color: #404040;
-  border-right-color: #ffffff;
-  border-bottom-color: #ffffff;
-
-  transform: translate(1px, 1px);
-}
-
-.taskbar-volume-area {
-  position: relative;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.taskbar-volume-button {
-  width: 32px;
-  height: 100%;
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  padding: 0;
-  cursor: default;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.taskbar-volume-button:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.taskbar-volume-popup {
-  position: absolute;
-  right: 2px;
-  bottom: calc(100% + 4px);
-  width: 34px;
-  height: 120px;
-  padding: 8px 6px;
-  background: #c0c0c0;
-
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #404040;
-  border-bottom: 2px solid #404040;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-}
-
-.taskbar-volume-popup input[type="range"] {
-  width: 100px;
-  height: 18px;
-  transform: rotate(-90deg);
-  appearance: none;
-  -webkit-appearance: none;
-  background: transparent;
-}
-
-.taskbar-volume-popup input[type="range"]::-webkit-slider-runnable-track {
-  height: 4px;
-  background: #808080;
-  border-top: 1px solid #404040;
-  border-left: 1px solid #404040;
-  border-bottom: 1px solid #ffffff;
-}
-
-.taskbar-volume-popup input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 12px;
-  height: 18px;
-  margin-top: -7px;
-  background: #c0c0c0;
-
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #404040;
-  border-bottom: 2px solid #404040;
-}
-
-.taskbar-volume-popup input[type="range"]::-moz-range-track {
-  height: 4px;
-  background: #808080;
-}
-
-.taskbar-volume-popup input[type="range"]::-moz-range-thumb {
-  width: 12px;
-  height: 18px;
-  background: #c0c0c0;
-
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #404040;
-  border-bottom: 2px solid #404040;
-}
-
