@@ -140,6 +140,7 @@ Music and icons used by the website is credited to the respective artists.
 -  Takahashi Takashi
 -  James CLarke
 -  Microsoft Corporation
+-  Alex Meub
 
 Additional assets and design elements are either original to this project or used in accordance with their respective licences.
 
