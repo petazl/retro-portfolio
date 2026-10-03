@@ -1,78 +1,150 @@
-# React + TypeScript + Vite
+# Petazl's Retro Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Instead of presenting my portfolio as a conventional webpage, the site is built to feel like using an old desktop operating system — complete with draggable windows, a taskbar, desktop icons, a music player, CRT effects, and other interactive elements.
 
-Currently, two official plugins are available:
+Live site: [Coming soon]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# Features
 
-## React Compiler
+-  Windows 98-inspired desktop interface
+-  Draggable application windows
+-  Window focus and z-index management
+-  Minimise and maximise window functionality
+-  Desktop application icons
+-  Built-in music player
+-  Randomised track selection
+-  Taskbar volume control and mute functionality
+-  System clock
+-  Animated CRT monitor effects
+-  Custom retro scrollbars
+-  Responsive behaviour for smaller screens
+-  Component-based React architecture
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+# Stack
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+React - UI and component architecture
+TypeScript - Type=safe application logic
+Vite - Development server and build tooling
+CSS - Windows 98-inspired styling and animations
+HTML5 Audio API - Music player functionality
+ESLint - Code quality and linting
 
-## Expanding the ESLint configuration
+# Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The project was originally built as a single large React component, but has since been refactored into a modular component architecture.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The application is now separated into:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+-  Components — visual/UI elements
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+-  Hooks — application logic and state management
 
-```
+-  Data — static application data
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+-  Types — shared TypeScript definitions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+-  Assets — images and music
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Project Structure
 
 ```
+src/
+│
+├── App.tsx
+├── App.css
+│
+├── components/
+│   │
+│   ├── Desktop/
+│   │   ├── Desktop.tsx
+│   │   └── Desktop.css
+│   │
+│   ├── Windows/
+│   │   ├── RetroWindow.tsx
+│   │   ├── RetroWindow.css
+│   │   │
+│   │   ├── AboutWindow.tsx
+│   │   ├── AboutWindow.css
+│   │   │
+│   │   ├── SocialWindow.tsx
+│   │   ├── SocialWindow.css
+│   │   │
+│   │   ├── MusicWindow.tsx
+│   │   └── MusicWindow.css
+│   │
+│   ├── Taskbar/
+│   │   ├── Taskbar.tsx
+│   │   ├── Taskbar.css
+│   │   │
+│   │   ├── VolumeControl.tsx
+│   │   ├── VolumeControl.css
+│   │   │
+│   │   ├── Clock.tsx
+│   │   └── Clock.css
+│   │
+│   └── CRT/
+│       ├── CRT.tsx
+│       └── CRT.css
+│
+├── data/
+│   └── playlist.ts
+│
+├── hooks/
+│   ├── useAudioPlayer.ts
+│   └── useWindowManager.ts
+│
+├── types/
+│   └── windows.ts
+│
+└── assets/
+    ├── about-me.png
+    ├── social.png
+    ├── desktop-background.png
+    ├── windows98-cd.png
+    │
+    └── music/
+        ├── A Night Alone -TrackTribe.mp3
+        ├── Entrance Wreath - Chika.mp3
+        ├── Local Elevator - Kevin MacLeod.mp3
+        ├── Muscat and White Dishes - Takahashi Takashi.mp3
+        ├── Relaxed Scene - James Clarke.mp3
+        ├── Summer Sky and Homework - Takahashi Takashi.mp3
+        └── Wind Trail - Chika.mp3
+```
+
+# Roadmap
+
+This portfolio is still an ongoing project. Potential future additions include:
+
+-  Projects application
+-  Individual project windows
+-  File Explorer / "My Computer"
+-  Skills / system information window
+-  Interactive mini-game
+-  Notepad / blog system
+-  More desktop applications
+-  More animations and system interactions
+-  Additional personal content
+
+# Design
+
+The visual design is heavily inspired by the desktop software of the Windows 95/98 era, whilst the implementation is built using standard modern web technologies.
+
+# Credits
+
+Music and icons used by the website is credited to the respective artists.
+
+-  Tracktribe
+-  Chika
+-  Kevin MacLeod
+-  Takahashi Takashi
+-  James CLarke
+-  Microsoft Corporation
+
+Additional assets and design elements are either original to this project or used in accordance with their respective licences.
+
+# License
+
+This project is primarily a personal portfolio project.
+Unless otherwise stated, the source code and original assets are © Richmond Kyawzay.
+Third-party assets, including music, remain the property of their respective creators and are subject to their original licences
