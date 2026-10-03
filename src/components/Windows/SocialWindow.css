@@ -1,0 +1,39 @@
+/* =========================================================
+   Social
+   ========================================================= */
+
+.social-links {
+  display: flex;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  padding: 7px 14px;
+
+  background: #c0c0c0;
+
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #404040;
+  border-bottom: 3px solid #404040;
+
+  color: #000000;
+
+  text-decoration: none;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.social-links a:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+
+  transform: translate(1px, 1px);
+}

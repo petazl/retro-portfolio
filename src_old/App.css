@@ -1,0 +1,1275 @@
+/* =========================================================
+   Pixelify Sans
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap");
+
+
+/* =========================================================
+   Global fonts
+   ========================================================= */
+
+.desktop {
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+.retro-window {
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+}
+
+
+/* =========================================================
+   Global Windows 95/98-style scrollbars
+   ========================================================= */
+
+* {
+  scrollbar-color: #c0c0c0 #ffffff;
+  scrollbar-width: auto;
+}
+
+*::-webkit-scrollbar {
+  width: 20px;
+  height: 20px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #ffffff;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #c0c0c0 0,
+    #c0c0c0 1px,
+    #ffffff 1px,
+    #ffffff 2px
+  );
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  min-height: 28px;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+*::-webkit-scrollbar-button {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+}
+
+*::-webkit-scrollbar-button:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+*::-webkit-scrollbar-corner {
+  background: #c0c0c0;
+}
+
+
+/* =========================================================
+   Desktop
+   ========================================================= */
+
+.desktop {
+  width: 100%;
+  height: 100vh;
+
+  position: relative;
+  overflow: hidden;
+
+  font-family: "Pixelify Sans", sans-serif;
+  color: #000000;
+
+  filter: saturate(0.88) brightness(0.92);
+}
+
+
+/* =========================================================
+   Desktop icons
+   ========================================================= */
+
+.desktop-icon {
+  width: 100px;
+  padding: 10px 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 5px;
+
+  border: none;
+  border-radius: 2px;
+
+  background: transparent;
+  color: #ffffff;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  transition: background 120ms ease;
+}
+
+.desktop-icon:hover {
+  background: transparent;
+
+  outline: 4px solid rgba(0, 0, 0, 0.18);
+  outline-offset: -10px;
+
+  border-radius: 4px;
+}
+
+.desktop-icon-image {
+  width: 48px;
+  height: 48px;
+
+  object-fit: contain;
+
+  image-rendering: pixelated;
+}
+
+.desktop-icon-label {
+  font-family: "Pixelify Sans", sans-serif;
+
+  font-size: 14px;
+
+  text-shadow:
+    1px 1px 0 #000000,
+    -1px 0 0 #000000;
+}
+
+
+/* =========================================================
+   Windows
+   ========================================================= */
+
+.retro-window {
+  position: absolute;
+
+  width: 620px;
+  max-width: calc(100vw - 40px);
+
+  background: #a8a8a8;
+
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #404040;
+  border-bottom: 3px solid #404040;
+
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.retro-window-maximized {
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 42px !important;
+
+  width: auto !important;
+  max-width: none !important;
+
+  box-sizing: border-box;
+
+  box-shadow: none;
+}
+
+.retro-window-maximized .about-window-body {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+}
+
+.retro-window-maximized .window-content {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+}
+
+
+/* =========================================================
+   Window controls
+   ========================================================= */
+
+.window-controls {
+  display: flex;
+  gap: 3px;
+}
+
+.window-minimize,
+.window-maximize,
+.window-close {
+  width: 22px;
+  height: 22px;
+
+  padding: 0;
+
+  background: #c0c0c0;
+
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #404040;
+  border-bottom: 3px solid #404040;
+
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 16px;
+
+  cursor: pointer;
+}
+
+.window-minimize:active,
+.window-maximize:active,
+.window-close:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+
+/* =========================================================
+   Window title bar
+   ========================================================= */
+
+.window-titlebar {
+  height: 30px;
+  flex: 0 0 30px;
+
+  padding: 0 4px 0 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: linear-gradient(
+    to right,
+    #0d84bb 0%,
+    #0859b4 35%,
+    #000080 100%
+  );
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  cursor: move;
+  user-select: none;
+}
+
+
+/* =========================================================
+   Music Player
+   ========================================================= */
+
+.retro-window:has(.music-window-content) {
+  width: 320px;
+  height: 300px;
+}
+
+.retro-window.retro-window-maximized:has(.music-window-content) {
+  width: auto;
+  height: auto;
+}
+
+.music-window-content {
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 4px;
+
+  background: #a8a8a8;
+}
+
+.music-screen {
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 12px;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.music-cd {
+  width: 90px;
+  height: 90px;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+}
+
+.music-track-info {
+  width: 100%;
+  min-width: 0;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   Music title marquee
+   ========================================================= */
+
+.music-track-title {
+  width: 100%;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  font-weight: bold;
+}
+
+.music-track-title-scroll {
+  display: flex;
+
+  width: max-content;
+
+  white-space: nowrap;
+
+  animation: music-title-scroll 18s linear infinite;
+}
+
+.music-track-title-sequence {
+  display: inline-flex;
+
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+.music-track-title-sequence b {
+  display: inline-block;
+
+  margin: 0 10px;
+
+  font-weight: normal;
+}
+
+@keyframes music-title-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.music-track-artist {
+  margin-top: 2px;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   Windows 98 Progress Bar
+   ========================================================= */
+
+.music-progress-area {
+  width: 100%;
+
+  margin-top: 2px;
+}
+
+.music-progress {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 100%;
+  height: 18px;
+
+  margin: 0;
+  padding: 2px;
+
+  box-sizing: border-box;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  cursor: pointer;
+}
+
+
+/* Chrome / Edge / Chromium */
+
+.music-progress::-webkit-slider-runnable-track {
+  height: 10px;
+
+  background: #c0c0c0;
+}
+
+.music-progress::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 10px;
+  height: 14px;
+
+  margin-top: -2px;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  cursor: pointer;
+}
+
+
+/* Firefox */
+
+.music-progress::-moz-range-track {
+  height: 10px;
+
+  background: #c0c0c0;
+}
+
+.music-progress::-moz-range-thumb {
+  width: 10px;
+  height: 14px;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  border-radius: 0;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   Music time
+   ========================================================= */
+
+.music-time {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 2px;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   Windows 98 Transport Buttons
+   ========================================================= */
+
+.music-controls {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 4px;
+
+  margin-top: auto;
+}
+
+.music-controls button {
+  box-sizing: border-box;
+
+  min-width: 42px;
+  height: 30px;
+
+  padding: 2px 8px;
+
+  background: #d4d0c8;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  font-family: "MS Sans Serif", sans-serif;
+
+  font-size: 13px;
+  font-weight: normal;
+
+  color: #000000;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-controls button:hover {
+  background: #dcd8d0;
+}
+
+.music-controls button:active {
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  padding-top: 3px;
+  padding-left: 9px;
+}
+
+.music-controls .music-play-button {
+  min-width: 46px;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   Window content
+   ========================================================= */
+
+.window-content {
+  margin: 3px;
+
+  padding: 24px;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #d4d0c8 0%,
+      #d4d0c8 45%,
+      #d4d0c8 100%
+    );
+
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  box-sizing: border-box;
+}
+
+.window-content h1 {
+  margin-top: 0;
+  margin-bottom: 4px;
+
+  font-size: 28px;
+}
+
+.window-content h2 {
+  font-size: 20px;
+}
+
+.subtitle {
+  margin-top: 0;
+}
+
+.window-content hr {
+  border: none;
+
+  border-top: 2px solid #808080;
+  border-bottom: 1px solid #ffffff;
+
+  margin: 18px 0;
+}
+
+
+/* =========================================================
+   About window
+   ========================================================= */
+
+.about-window-body {
+  height: 480px;
+
+  display: flex;
+
+  box-sizing: border-box;
+
+  padding: 4px;
+
+  background: #a8a8a8;
+}
+
+.about-window-content {
+  min-width: 0;
+
+  flex: 1;
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  padding: 20px 18px 20px 20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #d4d0c8 0%,
+      #d4d0c8 45%,
+      #d4d0c8 100%
+    );
+
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  scrollbar-width: none;
+}
+
+.about-window-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+
+/* =========================================================
+   Custom About scrollbar
+   ========================================================= */
+
+.about-scrollbar {
+  width: 20px;
+  flex: 0 0 20px;
+
+  display: grid;
+
+  grid-template-rows: 20px minmax(0, 1fr) 20px;
+
+  background: #c0c0c0;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.about-scrollbar-button,
+.about-scrollbar-thumb {
+  box-sizing: border-box;
+
+  padding: 0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  background: #c0c0c0;
+
+  cursor: pointer;
+}
+
+.about-scrollbar-button {
+  position: relative;
+
+  width: 20px;
+  height: 20px;
+}
+
+.about-scrollbar-button span {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 0;
+  height: 0;
+
+  transform: translate(-50%, -50%);
+
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+
+.about-scrollbar-button-up span {
+  border-bottom: 6px solid #000000;
+}
+
+.about-scrollbar-button-down span {
+  border-top: 6px solid #000000;
+}
+
+.about-scrollbar-track {
+  position: relative;
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  background-color: #ffffff;
+
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #c0c0c0 0,
+    #c0c0c0 1px,
+    #ffffff 1px,
+    #ffffff 2px
+  );
+}
+
+.about-scrollbar-thumb {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  width: 100%;
+
+  touch-action: none;
+}
+
+.about-scrollbar-button:active,
+.about-scrollbar-thumb:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+
+/* =========================================================
+   About typography
+   ========================================================= */
+
+.about-role {
+  margin-top: 0;
+  margin-bottom: 4px;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.about-section {
+  margin-bottom: 28px;
+}
+
+.about-section h2 {
+  margin: 0 0 10px 0;
+
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.about-entry {
+  margin-bottom: 18px;
+}
+
+.about-entry h3 {
+  margin: 0 0 4px 0;
+
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.about-entry p {
+  margin-top: 5px;
+
+  line-height: 1.5;
+}
+
+.about-meta {
+  margin: 0;
+
+  font-style: italic;
+
+  color: #404040;
+}
+
+.about-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+.about-tags span {
+  padding: 4px 7px;
+
+  background: #d4d0c8;
+
+  border: 1px solid #808080;
+
+  font-size: 12px;
+}
+
+.about-footer {
+  text-align: center;
+
+  font-style: italic;
+}
+
+
+/* =========================================================
+   Social
+   ========================================================= */
+
+.social-links {
+  display: flex;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  padding: 7px 14px;
+
+  background: #c0c0c0;
+
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #404040;
+  border-bottom: 3px solid #404040;
+
+  color: #000000;
+
+  text-decoration: none;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.social-links a:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+
+  transform: translate(1px, 1px);
+}
+
+
+/* =========================================================
+   Taskbar
+   ========================================================= */
+
+.taskbar {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 3px;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   Start button
+   ========================================================= */
+
+.start-button {
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  box-sizing: border-box;
+
+  padding: 0 10px;
+
+  background: #c0c0c0;
+
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #404040;
+  border-bottom: 3px solid #404040;
+
+  cursor: pointer;
+
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+}
+
+.start-button:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+
+  transform: translate(1px, 1px);
+}
+
+
+/* =========================================================
+   Taskbar application buttons
+   ========================================================= */
+
+.taskbar-windows {
+  display: flex;
+
+  align-items: center;
+
+  gap: 2px;
+}
+
+.taskbar-app {
+  height: 32px;
+
+  min-width: 120px;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding: 0 8px;
+  margin: 0;
+
+  background: #c0c0c0;
+
+  border: none;
+
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #404040;
+  border-bottom: 3px solid #404040;
+
+  color: #000000;
+
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+
+  font-size: 13px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  appearance: none;
+}
+
+.taskbar-app:active {
+  border-top-color: #404040;
+  border-left-color: #404040;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+
+  transform: translate(1px, 1px);
+}
+
+.taskbar-app-icon {
+  width: 22px;
+  height: 22px;
+
+  margin-right: 7px;
+
+  object-fit: contain;
+
+  image-rendering: pixelated;
+
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   System tray
+   ========================================================= */
+
+.taskbar-system-tray {
+  display: flex;
+
+  align-items: center;
+
+  height: 100%;
+
+  margin-left: auto;
+}
+
+
+/* =========================================================
+   Volume control
+   ========================================================= */
+
+.volume-control {
+  position: relative;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.volume-button {
+  width: 34px;
+  height: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.volume-popup {
+  position: absolute;
+
+  right: 0;
+
+  bottom: 100%;
+
+  width: 34px;
+  height: 110px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+
+  z-index: 9999;
+}
+
+.volume-slider {
+  width: 90px;
+
+  transform: rotate(-90deg);
+}
+ 
+
+/* =========================================================
+   Volume slider
+   ========================================================= */
+
+.volume-slider {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 90px;
+  height: 18px;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  height: 4px;
+
+  background: #808080;
+
+  border-top: 1px solid #404040;
+  border-left: 1px solid #404040;
+  border-bottom: 1px solid #ffffff;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 12px;
+  height: 18px;
+
+  margin-top: -7px;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+}
+
+.volume-slider::-moz-range-track {
+  height: 4px;
+
+  background: #808080;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 18px;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  border-radius: 0;
+}
+
+
+/* =========================================================
+   Taskbar clock
+   ========================================================= */
+
+.taskbar-clock {
+  height: calc(100% - 6px);
+
+  min-width: 72px;
+
+  margin: 3px 3px 3px 2px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 0 12px;
+
+  border-top: 3px solid #808080;
+  border-left: 3px solid #808080;
+  border-right: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+
+  font-size: 13px;
+
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+}
+
+/* =========================
+   CRT MONITOR EFFECT
+   ========================= */
+
+.desktop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+
+  /* Fine animated scanlines */
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.045) 0px,
+      rgba(0, 0, 0, 0.045) 1px,
+      rgba(255, 255, 255, 0.015) 2px,
+      rgba(255, 255, 255, 0.015) 3px
+    );
+
+  background-size: 100% 3px;
+
+  animation: crt-scanlines 0.18s linear infinite;
+}
+
+@keyframes crt-scanlines {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 3px;
+  }
+}
+
+
+/* =========================
+   CRT HUM BAR
+   ========================= */
+
+.desktop::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: 9999;
+  pointer-events: none;
+
+  /* Subtle power-supply ripple / hum bar */
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 47.5%,
+      rgba(255, 255, 255, 0.012) 48.5%,
+      rgba(255, 255, 255, 0.035) 49.5%,
+      rgba(255, 255, 255, 0.012) 50.5%,
+      transparent 52.5%,
+      transparent 100%
+    );
+
+  animation: crt-hum-bar 5s linear infinite;
+
+  /* Subtle darkening around the edges */
+  box-shadow:
+    inset 0 0 80px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes crt-hum-bar {
+  from {
+    transform: translateY(-55%);
+  }
+
+  to {
+    transform: translateY(55%);
+  }
+}

@@ -1,0 +1,29 @@
+/* =========================================================
+   Taskbar clock
+   ========================================================= */
+
+.taskbar-clock {
+  height: calc(100% - 6px);
+
+  min-width: 72px;
+
+  margin: 3px 3px 3px 2px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 0 12px;
+
+  border-top: 3px solid #808080;
+  border-left: 3px solid #808080;
+  border-right: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+
+  font-size: 13px;
+
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+}

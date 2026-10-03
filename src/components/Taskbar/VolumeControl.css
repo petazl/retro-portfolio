@@ -1,0 +1,125 @@
+/* =========================================================
+   Volume control
+   ========================================================= */
+
+.volume-control {
+  position: relative;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.volume-button {
+  width: 34px;
+  height: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.volume-popup {
+  position: absolute;
+
+  right: 0;
+
+  bottom: 100%;
+
+  width: 34px;
+  height: 110px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+
+  z-index: 9999;
+}
+
+
+/* =========================================================
+   Volume slider
+   ========================================================= */
+
+.volume-slider {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 90px;
+  height: 18px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transform: rotate(-90deg);
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  height: 4px;
+
+  background: #808080;
+
+  border-top: 1px solid #404040;
+  border-left: 1px solid #404040;
+  border-bottom: 1px solid #ffffff;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 12px;
+  height: 18px;
+
+  margin-top: -7px;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+}
+
+.volume-slider::-moz-range-track {
+  height: 4px;
+
+  background: #808080;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 18px;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+
+  border-radius: 0;
+}
